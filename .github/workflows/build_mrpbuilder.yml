@@ -20,7 +20,7 @@ jobs:
 
       - name: Build and run mrpbuilder
         run: |
-          native-image -jar mrpbuilder.jar
+          native-image -Dfile.encoding=UTF-8 -jar mrpbuilder.jar
           ./mrpbuilder
       
       - name: Upload binary

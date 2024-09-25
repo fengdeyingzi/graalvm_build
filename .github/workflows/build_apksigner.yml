@@ -1,0 +1,39 @@
+name: GraalVM Native Image builds
+on: [push, pull_request]
+jobs:
+  build:
+    name: apksigner on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: '22.3.2'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+      - name: Set language environment variable (Windows only)  
+        if: startsWith(matrix.os, 'windows')  
+        run: |  
+          echo "Setting up language environment..."  
+          # 这里可以添加设置环境变量的PowerShell命令  
+          # 注意：这通常不会改变系统UI语言  
+          echo "LANG=en_US.UTF-8" >> $GITHUB_ENV  
+          # 但这只会影响你的脚本或程序的运行环境 
+          CHCP 65001
+          echo "设置完成"
+      - name: Build and run
+        run: |
+          native-image "-Dfile.encoding=GBK" -jar apksigner.jar
+          ./apksigner
+      
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: apksigner-${{ matrix.os }}
+          path: apksigner*

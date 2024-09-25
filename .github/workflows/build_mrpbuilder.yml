@@ -25,7 +25,7 @@ jobs:
           # 注意：这通常不会改变系统UI语言  
           echo "LANG=en_US.UTF-8" >> $GITHUB_ENV  
           # 但这只会影响你的脚本或程序的运行环境 
-          CHCP 936
+          CHCP 65001
           echo "设置完成"
       - name: Build and run mrpbuilder
         run: |

@@ -17,7 +17,14 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
-
+      - name: Set language environment variable (Windows only)  
+        if: startsWith(matrix.os, 'windows')  
+        run: |  
+          echo "Setting up language environment..."  
+          # 这里可以添加设置环境变量的PowerShell命令  
+          # 注意：这通常不会改变系统UI语言  
+          echo "LANG=en_US.UTF-8" >> $GITHUB_ENV  
+          # 但这只会影响你的脚本或程序的运行环境 
       - name: Build and run mrpbuilder
         run: |
           native-image -Dfile.encoding=UTF-8 -jar mrpbuilder.jar

@@ -24,7 +24,7 @@ jobs:
           ./mrpbuilder
       
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: mrpbuilder-${{ matrix.os }}
           path: mrpbuilder*

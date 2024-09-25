@@ -17,6 +17,12 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
+      - name: Set up Chinese locale
+        run: |
+          Set-Item -Path "HKCU:\Control Panel\International" -Name Locale -Value "zh-CN"
+          Set-Item -Path "HKCU:\Control Panel\International" -Name LocaleName -Value "zh-CN"
+          Set-Item -Path "HKCU:\Control Panel\International" -Name SLocale -Value "zh-CN"
+          # 还可以设置区域格式等其他项
       - name: Set language environment variable (Windows only)  
         if: startsWith(matrix.os, 'windows')  
         run: |  
@@ -26,6 +32,7 @@ jobs:
           echo "LANG=en_US.UTF-8" >> $GITHUB_ENV  
           # 但这只会影响你的脚本或程序的运行环境 
           CHCP 936
+          echo "设置完成"
       - name: Build and run mrpbuilder
         run: |
           native-image -jar mrpbuilder.jar

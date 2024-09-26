@@ -1,0 +1,11 @@
+[
+    {
+        "name": "com.android.apksigner.SignerParams",
+        "allDeclaredConstructors": true,
+        "allDeclaredMethods": true
+    },
+    {
+        "name": "org.conscrypt.NativeLibraryLoader",
+        "allDeclaredMethods": true
+    }
+]

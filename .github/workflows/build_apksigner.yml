@@ -29,7 +29,7 @@ jobs:
           echo "设置完成"
       - name: Build and run
         run: |
-          native-image "-Dfile.encoding=GBK" "--initialize-at-build-time=com.android.apksigner.*" "-H:ReflectionConfigurationFiles=./reflect-config.json" -jar apksigner.jar
+          native-image "-Dfile.encoding=GBK" "--initialize-at-build-time=com.android.apksigner.*" "-H:ReflectionConfigurationFiles=reflect-config.json" -jar apksigner.jar
           ./apksigner
       
       - name: Upload binary

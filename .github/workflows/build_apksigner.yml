@@ -27,11 +27,12 @@ jobs:
           # 但这只会影响你的脚本或程序的运行环境 
           CHCP 65001
           echo "设置完成"
-      - name: Build and run
+      - name: Build
         run: |
           native-image "-Dfile.encoding=GBK" "--initialize-at-build-time=com.android.apksigner.*" "-H:ReflectionConfigurationFiles=reflect-config.json" -jar apksigner.jar
+      - name: Run
+        run: |
           ./apksigner
-      
       - name: Upload binary
         uses: actions/upload-artifact@v4
         with:

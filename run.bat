@@ -1,0 +1,1 @@
+java -agentlib:native-image-agent=config-output-dir=./META-INF/native-image -jar apksigner.jar
